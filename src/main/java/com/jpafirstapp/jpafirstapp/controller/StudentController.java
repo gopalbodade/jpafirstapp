@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by shubhamrathi on 30/06/17.
@@ -33,8 +35,13 @@ public List<Student> getList(){
     public ResponseEntity<?> post(@RequestBody
                               Student  student){
     Student save = studentRepo.save(student);
-    ResponseEntity<Student> entity=new ResponseEntity("student saved successfully", HttpStatus.OK);
+    Map<String,Object> map=new HashMap();
 
+    map.put("status","success");
+    map.put("result",save);
+
+   // ResponseEntity<Student> entity=new ResponseEntity("student saved successfully", HttpStatus.OK);
+     ResponseEntity<?> entity=ResponseEntity.ok(map);
     return entity;
 }
 
