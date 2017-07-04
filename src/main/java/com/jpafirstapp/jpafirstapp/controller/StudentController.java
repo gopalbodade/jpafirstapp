@@ -45,16 +45,28 @@ public List<Student> getList(){
     return entity;
 }
     @RequestMapping(value="/uploadimage")
-    public String uploadImage(@RequestParam MultipartFile img)
+    public String uploadImage(@RequestParam Integer id,
+                              @RequestParam String name,
+                              @RequestParam String city,
+                              @RequestParam MultipartFile img)
     {
         String imageName=img.getOriginalFilename();
+        String imagePath="/Users/shubhamrathi/Desktop/Image/";
+        String path=imagePath+imageName;
         File f=new File("/Users/shubhamrathi/Desktop/Image/"+imageName);
         try {
             img.transferTo(f);
         } catch (IOException e) {
             e.printStackTrace();
         }
-     return "uploaded";
+        Student s=new Student();
+        s.setImgPath(path);
+        s.setName(name);
+        s.setId(id);
+        s.setCity(city);
+
+        studentRepo.save(s);
+     return "success";
     }
 
 }

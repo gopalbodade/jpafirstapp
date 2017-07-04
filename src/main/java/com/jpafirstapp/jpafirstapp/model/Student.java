@@ -40,4 +40,13 @@ public class Student {
     String name;
     String city;
 
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
+    String imgPath;
 }
